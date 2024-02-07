@@ -1,0 +1,85 @@
+﻿@using CustoomerToken.Domain.Tokens
+@model CustoomerToken.Models.TokenCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form onsubmit="createTokenSubmit(event)">
+            <fieldset>
+                <legend>Create Token</legend>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Query" class="form-label mt-4"></label>
+                    <select asp-for="Query" class="form-select" id="tokenqueryip"
+                    asp-items="@(Enum.GetValues<QueryType>()
+                                .Select(x=> new SelectListItem(
+                                    Enum.GetName<QueryType>(x),
+                                    ((int)x).ToString()
+                                    )).ToList())" >
+                    </select>
+                    <span asp-validation-for="Query" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-4">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div id="tokenMessage">
+    
+</div>
+
+
+<div>
+    <a asp-action="Index" asp-controller="Token">Go to Dashboard</a>
+</div>
+
+@section scripts{
+
+    <script language="JavaScript">
+        function createTokenSubmit(e) {
+            e.preventDefault();
+            var queryVal = document.getElementById("tokenqueryip").value;
+            debugger
+            var data = {
+                query: parseInt(queryVal)
+            }
+            fetch("https://localhost:7107/CreateToken",
+                {
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data), 
+                }).then(response => { 
+                    if (response.ok) {
+                        return response.json()
+                    } else { 
+                        return new Promise.reject("Something went wrong")
+                    }
+                }).then(response => 
+                    {
+                    var messageDiv = $("#tokenMessage")
+                    var innerhtml = `
+                            <div class="alert alert-dismissible alert-success">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                                Token has been created <strong> Query No : </strong> <a href="#" class="alert-link"> ${padZeroNumber(response.id, 3)}</a> and <strong> Query Type : </strong> ${getQueryName(response.queryId)}
+                                    </div>
+                    `
+                    messageDiv.append(innerhtml)
+                    })
+            
+            return false
+        }
+    </script>
+}
+
+
