@@ -5,20 +5,19 @@
 
 
 function getAllQueryName() {
-    return [
-        {
-            key: "1",
-            value: getQueryName("1")
-        },
-        {
-            key: "2",
-            value: getQueryName("2")
-        },
-        {
-            key: "3",
-            value: getQueryName("3")
-        },
-    ]
+    return [{
+        key: "1"
+        , value: getQueryName("1")
+    }
+        , {
+        key: "2"
+        , value: getQueryName("2")
+    }
+        , {
+        key: "3"
+        , value: getQueryName("3")
+    }
+        ,]
 }
 
 function getQueryName(queryId) {

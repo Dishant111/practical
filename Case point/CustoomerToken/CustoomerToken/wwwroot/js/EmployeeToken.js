@@ -8,8 +8,8 @@ var pageSize = 10;
 var pageNo = 1;
 $(document).ready(function () {
 
-    LoadGrid(pageSize, pageNo);
-});
+        LoadGrid(pageSize, pageNo);
+    });
 
 function getPainationUrl(pageSize, pageNo) {
     return `https://localhost:7107/Employee/dynamic/dashBoard?pageSize=${pageSize}&pageNo=${pageNo}`
@@ -17,9 +17,9 @@ function getPainationUrl(pageSize, pageNo) {
 
 function LoadGrid(pageSize, pageNo) {
     if (pageNo == 1) {
-        //if (interval == 0) interval = setInterval(() => LoadGrid(pageSize, pageNo), 4000);
+        if (interval == 0) interval = setInterval(() => LoadGrid(pageSize, pageNo), 4000);
     } else {
-        //clearInterval(interval)
+        clearInterval(interval)
         interval = 0
     }
 
@@ -27,8 +27,7 @@ function LoadGrid(pageSize, pageNo) {
         .then(result => {
             if (result.ok) {
                 return result.json()
-            }
-            else {
+            } else {
                 return Promise.reject("unable to get data at moment")
             }
         })
@@ -45,7 +44,8 @@ function LoadGrid(pageSize, pageNo) {
 
             element.innerHTML = innerHtml
             loadPagination(response.pagesize, response.pageNumber, response.totalCount)
-        }).catch(error => {
+        })
+        .catch(error => {
             var element = document.getElementById("tokentablebody");
             element.innerHTML = `
             <p>The following is <strong>${error}</strong>.</p>
@@ -139,7 +139,7 @@ function setTokeToProcess(id) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-            }
+        }
         }).then(response => {
 
             console.log(response.status)
@@ -162,7 +162,7 @@ function setTokeToPending(id) {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-            }
+        }
         }).then(response => {
 
             console.log(response.status)
@@ -181,12 +181,12 @@ function setTokeToPending(id) {
 
 // data must have address, phoneNumber and id
 function resolveToken(data, callback) {
-    
+
     reqdata = {
-        id: data.id,
-        address: data.address,
-        phoneNumber: data.phoneNumber,
-        query: parseInt(data.query)
+        id: data.id
+        , address: data.address
+        , phoneNumber: data.phoneNumber
+        , query: parseInt(data.query)
     }
 
     fetch(`${url}Resolve`,
@@ -203,7 +203,7 @@ function resolveToken(data, callback) {
             if (response.ok) {
 
                 callback(response)
-                
+
             } else {
                 return new Promise.reject("Something went wrong")
             }
@@ -271,11 +271,11 @@ function getTokenById(id, callback) {
         .then(result => {
             if (result.ok) {
                 return result.json()
-            }
-            else {
+            } else {
                 return Promise.reject("unable to get data at moment")
             }
-        }).then(
+        })
+        .then(
             response => {
                 callback(response)
             }
@@ -286,15 +286,19 @@ function getTokenById(id, callback) {
 function submitResolveModel(e, id) {
     e.preventDefault();
     resolveToken({
-        id: id,
-        address: document.getElementById("resolveModelAddress").value,
-        phoneNumber: document.getElementById("resolveModelPhone").value,
-        query: document.getElementById("resolveModelQuery").value
-    },
-     abc)
+        id: id
+        , address: document.getElementById("resolveModelAddress")
+            .value
+        , phoneNumber: document.getElementById("resolveModelPhone")
+            .value
+        , query: document.getElementById("resolveModelQuery")
+            .value
+    }
+        , HandleSuccessModelSave)
 
 }
-function abc(response) {
+
+function HandleSuccessModelSave(response) {
     debugger
     LoadGrid(pageSize, pageNo);
 

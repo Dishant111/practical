@@ -5,11 +5,12 @@
 var url = "https://localhost:7107/"
 var interval = 0
 $(document).ready(function () {
-    var pageSize = 10;
-    var pageNo = 1;
+        var pageSize = 10;
+        var pageNo = 1;
 
-    LoadGrid(pageSize, pageNo);
-});
+        LoadGrid(pageSize, pageNo);
+    });
+
 function getPainationUrl(pageSize, pageNo) {
     return `https://localhost:7107/dynamic/dashBoard?pageSize=${pageSize}&pageNo=${pageNo}`
 }
@@ -26,8 +27,7 @@ function LoadGrid(pageSize, pageNo) {
         .then(result => {
             if (result.ok) {
                 return result.json()
-            } 
-            else {
+            } else {
                 return Promise.reject("unable to get data at moment")
             }
         })
@@ -46,7 +46,8 @@ function LoadGrid(pageSize, pageNo) {
 
             element.innerHTML = innerHtml
             loadPagination(response.pagesize, response.pageNumber, response.totalCount)
-        }).catch(error => {
+        })
+        .catch(error => {
             var element = document.getElementById("tokentablebody");
             element.innerHTML = `
             <p>The following is <strong>${error}</strong>.</p>

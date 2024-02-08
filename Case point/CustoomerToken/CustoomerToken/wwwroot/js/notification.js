@@ -5,5 +5,5 @@
 $(document).ready(function () {
     $(".myToast").each((index, element) => {
         $(element).toast("show")
+     });
     });
-});
