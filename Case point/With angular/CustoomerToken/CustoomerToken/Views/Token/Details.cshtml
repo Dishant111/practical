@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+}
+
+<h2>Dynamic Dashbord  <small class="text-body-secondary"> (page 1 will get updated every 4 sec) </small> </h2>
+<p>
+    <a role="button" class="btn btn-outline-primary" asp-action="Create" asp-controller="Token"><i class="bi bi-plus-square me-2"></i>Create New Query</a>
+</p>
+
+<div class="">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Id
+                </th>
+                <th scope="col">
+                    Query Type
+                </th>
+                <th scope="col">
+                    Query Status
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tokentablebody">
+        </tbody>
+
+    </table>
+
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <ul class="pagination" id="tokenPagination">
+        </ul>
+    </div>
+
+</div>
+
+
+
+@section scripts {
+    <script src="~/js/Token.js" asp-append-version="true"></script>
+}
