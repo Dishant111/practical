@@ -1,0 +1,40 @@
+﻿@using CustoomerToken.Services
+@model IEnumerable<Notification>
+
+@if (Model is not null && Model.Any())
+{
+    <div class="toast-container" style="position: absolute; top: 10px; right: 10px;">
+        @foreach (var item in Model)
+        {
+            @if (item.Type == NotificationType.Sucess)
+            {
+                <div class="toast fade myToast" data-bs-autohide="true" data-bs-delay="2000">
+                    <div class="alert alert-dismissible alert-success mb-0 mt-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        @if (!string.IsNullOrEmpty(@item.Header))
+                        {
+                            <strong>@item.Header</strong>
+                            <br />
+                        }
+                        @item.Message
+                    </div>
+                </div>
+            }
+
+            @if (item.Type == NotificationType.Error)
+            {
+                <div class="toast fade myToast" data-bs-autohide="true" data-bs-delay="2000">
+                    <div class="alert alert-dismissible alert-danger mb-0 mt-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                        @if (!string.IsNullOrEmpty(@item.Header))
+                        {
+                            <strong>@item.Header</strong>
+                            <br />
+                        }
+                        @item.Message
+                    </div>
+                </div>
+            }           }
+    </div>
+}
+
