@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-6">
+      <form [formGroup]="tokenModelForm" (ngSubmit)="submitTokenModel()">
+        <div class="form-group">
+          <label for="exampleSelect1" class="form-label mt-4">Query Type</label>
+          <select class="form-select" formControlName="queryType">
+            <option *ngFor="let item of getAllQueryName()" [ngValue]="item.key">
+              {{ item.value }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-4">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="tokenModelForm.invalid"
+          >
+            Resolve
+          </button>
+          <a
+            role="button"
+            class="btn btn-outline-primary ms-4"
+            routerLink="/customer"
+            ><i class="bi bi-skip-backward me-2"></i>Back to list</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #createdModel let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Query no:</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>{{ createdTokenNo }}</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

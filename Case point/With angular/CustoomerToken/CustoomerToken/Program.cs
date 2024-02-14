@@ -44,6 +44,12 @@ builder.Services.AddAuthorization(option =>
     });
 });
 
+builder.Services.AddCors(op => {
+    op.AddPolicy("allowall",o =>
+    {
+        o.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,7 +65,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors("allowall");
 app.UseRouting();
 
 app.UseAuthentication();

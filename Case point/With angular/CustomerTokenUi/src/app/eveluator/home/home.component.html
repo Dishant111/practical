@@ -1,0 +1,162 @@
+<div class="container">
+  <main role="main" class="pb-3">
+    <h3>Dash board</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><strong>Id</strong></th>
+          <th scope="col"><strong>Query Type</strong></th>
+          <th scope="col"><strong>Query Status</strong></th>
+          <th scope="col"><strong>Action</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="{{ getStatusclass(item.status) }}"
+          *ngFor="let item of getData()"
+        >
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ getQueryName(item.query) }}</td>
+          <td>{{ getStatusName(item.status) }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="setTokenToPending(item.id)"
+              *ngIf="item.status == 3 || item.status == 2"
+            >
+              Change to pending
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="setTokenToProcess(item.id)"
+              *ngIf="item.status == 1"
+            >
+              Change to Processing
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="resolveToken(item.id)"
+            >
+              Resolve
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-pagination
+      [pagination]="pagination"
+      (pageChanged)="onPagerChanged($event)"
+    ></app-pagination>
+  </main>
+</div>
+
+<ng-template #resolvModel let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Resolve query</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+
+  <div class="modal-body" *ngIf="isModelLoading">
+    <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body" *ngIf="!isModelLoading">
+    <form [formGroup]="tokenModelForm" (ngSubmit)="submitTokenModel()">
+      <div class="form-group">
+        <label for="exampleSelect1" class="form-label mt-4">Query Status</label>
+        <select
+          class="form-select"
+          [disabled]="true"
+          formControlName="queryType"
+        >
+          <option *ngFor="let item of getAllQueryName()" [ngValue]="item.key">
+            {{ item.value }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4">Address</label>
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder="Address"
+          formControlName="address"
+          [class.is-valid]="
+            !tokenModelForm.controls.address.invalid &&
+            (tokenModelForm.controls.address.dirty ||
+              tokenModelForm.controls.address.touched)
+          "
+          [class.is-invalid]="
+            tokenModelForm.controls.address.invalid &&
+            (tokenModelForm.controls.address.dirty ||
+              tokenModelForm.controls.address.touched)
+          "
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4"
+          >Phone number</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder="Phone number"
+          formControlName="phone"
+          [class.is-valid]="
+            !tokenModelForm.controls.phone.invalid &&
+            (tokenModelForm.controls.phone.dirty ||
+              tokenModelForm.controls.phone.touched)
+          "
+          [class.is-invalid]="
+            tokenModelForm.controls.phone.invalid &&
+            (tokenModelForm.controls.phone.dirty ||
+              tokenModelForm.controls.phone.touched)
+          "
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="tokenModelForm.invalid"
+        >
+          Resolve
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="modal.close('Close click')"
+        >
+          Close
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- 
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div> -->
+</ng-template>

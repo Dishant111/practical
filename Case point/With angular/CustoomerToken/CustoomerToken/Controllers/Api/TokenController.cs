@@ -91,5 +91,26 @@ namespace CustoomerToken.Controllers.Api
 
             return Ok(token);
         }
+        
+        [HttpPost("create")]
+        public IActionResult Post(TokenCreateModel model)
+        {
+            try
+            {
+                var token = new Token()
+                {
+                    QueryId = model.Query,
+                    StatusId = Domain.Tokens.QueryStatus.Pending,
+                };
+
+                var tokensResult = _tokenService.Create(token);
+
+                return Ok(tokensResult);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }
