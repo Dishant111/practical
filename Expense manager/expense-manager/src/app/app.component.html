@@ -1,0 +1,139 @@
+<mat-sidenav-container
+  class="mainWrapper blue_theme"
+  autosize
+  autoFocus
+  dir="ltr"
+>
+  <mat-sidenav
+    #leftsidenav
+    [mode]="isOver ? 'over' : 'side'"
+    [opened]="!isOver"
+    (openedChange)="onSidenavOpenedChange($event)"
+    (closedStart)="onSidenavClosedStart()"
+    class="sidebarNav"
+  >
+    <!-- <app-sidebar></app-sidebar> -->
+    <div class="flex-layout">
+      <div class="branding">
+        <a href="/">
+          <img
+            src="./assets/images/logos/dark-logo.svg"
+            class="align-middle m-2"
+            alt="logo"
+          />
+        </a>
+      </div>
+      <mat-nav-list class="sidebar-list">
+        <app-nav-item *ngFor="let item of navItems" [item]="item">
+        </app-nav-item>
+      </mat-nav-list>
+      <!-- <div class="p-24 m-t-auto">
+        <div
+          class="bg-light-primary d-flex align-items-center rounded p-20 m-t-20"
+        >
+          <div>
+            <h5 class="mat-subtitle-1 f-s-16 f-w-600 m-b-8">
+              Unlimied <br />Access
+            </h5>
+            <a
+              mat-flat-button
+              color="primary"
+              href="https://adminmart.com/product/modernize-angular-admin-dashboard/"
+              target="_blank"
+              class="d-flex justify-content-center"
+            >
+              Upgrade
+            </a>
+          </div>
+          <img
+            src="/assets/images/backgrounds/rocket.png"
+            alt="imgae"
+            class="side-img"
+          />
+        </div>
+      </div> -->
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="contentWrapper">
+    <app-header
+      [showToggle]="!isOver"
+      (toggleCollapsed)="toggleCollapsed()"
+      (toggleMobileNav)="sidenav.toggle()"
+    ></app-header>
+    <router-outlet></router-outlet>
+
+    <main class="pageWrapper">
+      <!-- ============================================================== -->
+      <!-- Outlet -->
+      <!-- ============================================================== -->
+      <router-outlet></router-outlet>
+      <div class="row">
+        <div class="col-sm-6 col-lg-3" *ngFor="let productcard of productcards">
+          <mat-card class="cardWithShadow productcard overflow-hidden">
+            <a routerLink="/widgets/cards">
+              <img
+                src="{{ productcard.imgSrc }}"
+                alt="imgSrc"
+                class="w-100"
+                mat-card-image
+              />
+            </a>
+            <mat-card-content class="p-b-24 p-t-12 position-relative">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="icon-30 cart-btn"
+                matTooltip="Add to Cart"
+              >
+                <i-tabler name="basket" class="icon-16"></i-tabler>
+              </button>
+              <mat-card-title class="mat-headline-2 f-s-16 m-b-4">{{
+                productcard.title
+              }}</mat-card-title>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <h6 class="mat-body-2 f-w-600">${{ productcard.price }}</h6>
+                  <span class="f-s-14 m-l-4 text-decoration-line-through"
+                    >${{ productcard.rprice }}</span
+                  >
+                </div>
+                <div class="m-l-auto d-flex gap-4">
+                  <span
+                    ><i-tabler
+                      name="star"
+                      class="fill-warning icon-18"
+                    ></i-tabler
+                  ></span>
+                  <span
+                    ><i-tabler
+                      name="star"
+                      class="fill-warning icon-18"
+                    ></i-tabler
+                  ></span>
+                  <span
+                    ><i-tabler
+                      name="star"
+                      class="fill-warning icon-18"
+                    ></i-tabler
+                  ></span>
+                  <span
+                    ><i-tabler
+                      name="star"
+                      class="fill-warning icon-18"
+                    ></i-tabler
+                  ></span>
+                  <span
+                    ><i-tabler
+                      name="star"
+                      class="fill-warning icon-18"
+                    ></i-tabler
+                  ></span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
