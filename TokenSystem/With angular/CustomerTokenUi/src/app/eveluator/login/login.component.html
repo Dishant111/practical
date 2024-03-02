@@ -1,0 +1,84 @@
+<div class="container">
+  <main role="main" class="pb-3">
+    <h3>Login</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4"
+          >User name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder="user name"
+          formControlName="username"
+          [class.is-valid]="
+            !loginForm.controls.username.invalid &&
+            (loginForm.controls.username.dirty ||
+              loginForm.controls.username.touched)
+          "
+          [class.is-invalid]="
+            loginForm.controls.username.invalid &&
+            (loginForm.controls.username.dirty ||
+              loginForm.controls.username.touched)
+          "
+        />
+        <div
+          *ngIf="
+            loginForm.controls.username.invalid &&
+            loginForm.controls.username.errors &&
+            (loginForm.controls.username.dirty ||
+              loginForm.controls.username.touched)
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="loginForm.controls.username.hasError('required')"
+          >
+            This field is required.
+          </small>
+          <!-- <small
+              class="text-danger"
+              *ngIf="tokenModelForm.controls.address.hasError('maxlength')"
+            >
+              The maximum length for this field is {% raw %}{{
+                formGroup.get("toDo").errors.maxlength.requiredLength
+              }}{% endraw %} characters.
+            </small> -->
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="form-label mt-4"
+          >Phone number</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder=""
+          formControlName="password"
+          [class.is-valid]="
+            !loginForm.controls.password.invalid &&
+            (loginForm.controls.password.dirty ||
+              loginForm.controls.password.touched)
+          "
+          [class.is-invalid]="
+            loginForm.controls.password.invalid &&
+            (loginForm.controls.password.dirty ||
+              loginForm.controls.password.touched)
+          "
+        />
+      </div>
+      <div class="modal-footer mt-3">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loginForm.invalid"
+        >
+          Resolve
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

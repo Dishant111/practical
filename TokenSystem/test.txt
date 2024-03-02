@@ -1,0 +1,27 @@
+Case Point
+
+Customer token system
+
+Customer : 
+Customer can have Token based on service they want.
+
+Token as will be displayed in cusomer dashboard
+
+Customer Token -
+ 
+Token Id
+Status - Pending , reviewing and resolved
+Type
+Customer Name
+Customer Number
+
+Employee : 
+Employee can take query / Token from list and proceed it.
+List will update and dont show token again.
+
+Employee -
+
+Id
+Name 
+Password
+Type
