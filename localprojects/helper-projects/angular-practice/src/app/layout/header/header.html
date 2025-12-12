@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg border-bottom border-secondary-subtle fixed-top bg-dark">
+  <div class="container">
+    <button
+      class="navbar-toggle-button navbar-toggler"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-logo navbar-brand fw-bold" href="#">
+      <span class="text-primary">Boot</span>strap
+    </a>
+    <div
+      class="offcanvas offcanvas-start"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <a class="navbar-brand fw-bold" href="#"> <span class="text-primary">Boot</span>strap </a>
+        <button
+          class="btn-close navbar-toggler"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+        >
+          <span class="bi bi-x-lg"></span>
+        </button>
+      </div>
+      <div class="offcanvas-body justify-content-center">
+        <div class="navbar-toggle-button-menu" id="navbarNav">
+          <ul class="navbar-nav gap-2">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['demo-listing']" routerLinkActive="active"
+                >Demo Listing</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['input-forms']" routerLinkActive="active"
+                >Input Forms</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['login-forms']" routerLinkActive="active"
+                >Login Forms</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['cards']" routerLinkActive="active">Cards </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-togle" data-bs-toggle="dropdown">Dropdown</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">1st item</li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="btn btn-primary">1st link</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-profile dropdown text-end ms-2 navbar-brand">
+      <a
+        href="#"
+        class="d-block link-dark text-decoration-none dropdown-toggle"
+        id="dropdownUser1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img src="/images/Profile.png" alt="mdo" width="32" height="32" class="rounded-circle" />
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item fs-6 fw-normal" href="#">New project...</a></li>
+        <li><a class="dropdown-item fs-6 fw-normal" href="#">Settings</a></li>
+        <li><a class="dropdown-item fs-6 fw-normal" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item fs-6 fw-normal" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="mb-5 py-1"></div>

@@ -1,0 +1,112 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.card-image {
+    object-fit: fill;
+    // max-width: 18rem;
+    // max-height: 18rem;
+    max-width: inherit;
+    max-height: 18rem;
+}
+
+.card-container {
+    min-height: 50vh;
+}
+
+.nav-item {
+    cursor: pointer;
+}
+
+@include media-breakpoint-down(lg) {
+    .navbar-toggle-button {
+        order: 1;
+    }
+
+    .navbar-logo {
+        order: 2;
+    }
+
+    .navbar-toggle-button-menu {
+        order: 4;
+    }
+
+    .navbar-profile {
+        order: 3;
+    }
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+
+// $btncolor: cornflowerblue;
+// $btn-txt-color : white;
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+// .btn {
+//     padding: 10px;
+//     border-radius: 10px;
+//     background-color: $btncolor;
+//     color: $btn-txt-color;
+//     border-width: 1px;
+//     line-height: 20px;
+//     letter-spacing: 2px;
+//     transition: background-color 0.3s ease, color 0.3s ease;
+
+//     &:hover {
+//         padding: 10px;
+//         border-radius: 10px;
+//         background-color: $btn-txt-color;
+//         color: $btncolor;
+//         border-width: 1px;
+//         cursor: pointer;
+//     }
+
+
+//     // &::before {
+//     //     content: '<< ';
+//     // }
+//     // &::after {
+//     //     content: ' >>';
+//     // }
+// }
+
+/* Bootstrap Playground - Custom Styles */
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Hero gradient background */
+.hero {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, transparent 50%);
+}
+
+/* Feature icon styling */
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+}
+
+/* Card hover effect */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Custom navbar brand gradient */
+.navbar-brand .text-primary {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
