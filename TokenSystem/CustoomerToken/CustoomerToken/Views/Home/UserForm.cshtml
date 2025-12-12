@@ -1,0 +1,74 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "User Form";
+}
+
+<h2>User Form</h2>
+
+@using (Html.BeginForm("UserForm", "Home", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter your name" })
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
+        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
+        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "Enter your age", type = "number" })
+        @Html.ValidationMessageFor(m => m.Age, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "form-label" })
+        <div>
+            @Html.RadioButtonFor(m => m.Gender, "Male") Male
+            @Html.RadioButtonFor(m => m.Gender, "Female") Female
+        </div>
+        @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "form-label" })
+        @Html.DropDownListFor(m => m.Country, new SelectList(ViewBag.Countries), "Select a country", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Country, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group form-check">
+        @Html.CheckBoxFor(m => m.SubscribeToNewsletter, new { @class = "form-check-input" })
+        @Html.LabelFor(m => m.SubscribeToNewsletter, new { @class = "form-check-label" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Website, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Website, new { @class = "form-control", @placeholder = "Enter your website URL" })
+        @Html.ValidationMessageFor(m => m.Website, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Comments, new { @class = "form-label" })
+        @Html.TextAreaFor(m => m.Comments, new { @class = "form-control", @rows = 5, @placeholder = "Enter your comments" })
+        @Html.ValidationMessageFor(m => m.Comments, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProfilePhoto, new { @class = "form-label" })
+        <input type="file" asp-for="ProfilePhoto" class="form-control" />
+        @Html.ValidationMessageFor(m => m.ProfilePhoto, null, new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
